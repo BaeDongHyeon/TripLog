@@ -41,10 +41,13 @@
             <div class="field-error" th:errors="*{phone}"/>
         </div>
 
-        <div class="form-floating">
-            <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email">
-            <label for="email">이메일</label>
-            <div class="field-error" th:errors="*{email}"/>
+        <div class="row">
+            <div class="form-floating col-sm">
+                <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email">
+                <label for="email" style="margin-left: 11px">이메일</label>
+                <div class="field-error" th:errors="*{email}"/>
+            </div>
+            <button type="button" class="btn btn-primary col-2" style="margin-right: 12px; margin-bottom: 25px">중복확인</button>
         </div>
 
         <div class="form-floating">
