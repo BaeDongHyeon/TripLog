@@ -14,4 +14,9 @@ public class MemberService {
     public void signUpMember(Member member) {
         memberRepository.save(member);
     }
+
+    public boolean isExistsEmail(String email) {
+
+        return memberRepository.findByEmail(email) != null;
+    }
 }

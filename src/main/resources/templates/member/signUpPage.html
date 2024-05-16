@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
     <title>회원가입</title>
 
     <style>
@@ -47,7 +48,7 @@
                 <label for="email" style="margin-left: 11px">이메일</label>
                 <div class="field-error" th:errors="*{email}"/>
             </div>
-            <button type="button" class="btn btn-primary col-2" style="margin-right: 12px; margin-bottom: 25px">중복확인</button>
+            <button type="button" class="btn btn-primary col-2" style="margin-right: 12px; margin-bottom: 25px" id="duplicateCheckButton">중복확인</button>
         </div>
 
         <div class="form-floating">
@@ -73,6 +74,9 @@
 
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/js/emailDuplicateCheck.js"></script>
 </body>
 
 </html>
