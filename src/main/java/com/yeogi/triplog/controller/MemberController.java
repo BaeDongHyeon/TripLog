@@ -31,7 +31,7 @@ public class MemberController {
             return "member/signUpPage";
         }
 
-        memberService.signUpMember(memberSignUpForm.toEntity());
+        memberService.signUpMember(memberSignUpForm);
         return "redirect:/";
     }
 
