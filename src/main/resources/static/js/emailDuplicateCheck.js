@@ -44,10 +44,32 @@ $('#email').on('input', function () {
 
 // 가입하기 버튼 클릭 시 이메일 검증 상태를 확인
 $('#signUpButton').on('click', function () {
+    const password = $('#password').val();
+    const confirmPassword = $('#confirmPassword').val();
+    const passwordMatchMessage = $('#passwordMatchMessage');
+
     if (!isEmailValid) {
         alert('이메일 중복 확인을 완료해주세요.');
         return false;
     }
 
+    if (password !== confirmPassword) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return false;
+    }
+
     $('#signUpForm').submit();
+});
+
+// 비밀번호 확인 기능
+$('#confirmPassword').on('input', function () {
+    const password = $('#password').val();
+    const confirmPassword = $('#confirmPassword').val();
+    const passwordMatchMessage = $('#passwordMatchMessage');
+
+    if (password === confirmPassword) {
+        passwordMatchMessage.text('비밀번호가 일치합니다.').removeClass('password-mismatch').addClass('password-match');
+    } else {
+        passwordMatchMessage.text('비밀번호가 일치하지 않습니다.').removeClass('password-match').addClass('password-mismatch');
+    }
 });
