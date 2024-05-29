@@ -1,15 +1,19 @@
 package com.yeogi.triplog.controller;
 
+import com.yeogi.triplog.domain.member.form.EmailCheckRequest;
 import com.yeogi.triplog.domain.member.form.MemberSignUpForm;
 import com.yeogi.triplog.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -37,8 +41,18 @@ public class MemberController {
 
     @PostMapping("/email/duplicate/check")
     @ResponseBody
-    public ResponseEntity<Boolean> emailDuplicateCheck(@RequestBody Map<String, String> request) {
-        log.info("email={}", request.get("email"));
-        return ResponseEntity.ok(memberService.isExistsEmail(request.get("email")));
+    public ResponseEntity<?> emailDuplicateCheck(@Valid @RequestBody EmailCheckRequest emailCheckRequest, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            bindingResult.getAllErrors().forEach(error -> {
+                String fieldName = ((FieldError) error).getField();
+                String errorMessage = error.getDefaultMessage();
+                errors.put(fieldName, errorMessage);
+            });
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseEntity.ok(memberService.isExistsEmail(emailCheckRequest));
     }
 }
