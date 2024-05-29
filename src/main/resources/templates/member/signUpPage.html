@@ -28,7 +28,7 @@
         <h2>회원 가입</h2>
     </div>
 
-    <form th:action th:object="${memberSignUpForm}" method="post">
+    <form th:action th:object="${memberSignUpForm}" method="post" id="signUpForm">
 
         <div class="form-floating">
             <input type="text" id="name" th:field="*{name}" class="form-control" th:errorclass="field-error" placeholder="name">
@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="form-floating col-sm">
-                <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email">
+                <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email" onchange="resetEmailValidationStatus()">
                 <label for="email" style="margin-left: 11px">이메일</label>
                 <div class="field-error" th:errors="*{email}"/>
             </div>
@@ -61,7 +61,7 @@
 
         <div class="row">
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">
+                <button class="w-100 btn btn-primary btn-lg" type="button" id="signUpButton">
                     가입하기
                 </button>
             </div>
