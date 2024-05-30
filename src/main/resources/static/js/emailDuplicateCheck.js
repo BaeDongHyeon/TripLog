@@ -46,7 +46,6 @@ $('#email').on('input', function () {
 $('#signUpButton').on('click', function () {
     const password = $('#password').val();
     const confirmPassword = $('#confirmPassword').val();
-    const passwordMatchMessage = $('#passwordMatchMessage');
 
     if (!isEmailValid) {
         alert('이메일 중복 확인을 완료해주세요.');
