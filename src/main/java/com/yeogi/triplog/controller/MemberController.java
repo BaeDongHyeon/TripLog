@@ -1,6 +1,7 @@
 package com.yeogi.triplog.controller;
 
 import com.yeogi.triplog.domain.member.form.EmailCheckRequest;
+import com.yeogi.triplog.domain.member.form.LoginForm;
 import com.yeogi.triplog.domain.member.form.MemberSignUpForm;
 import com.yeogi.triplog.service.MemberService;
 import jakarta.validation.Valid;
@@ -54,5 +55,22 @@ public class MemberController {
         }
 
         return ResponseEntity.ok(memberService.isExistsEmail(emailCheckRequest));
+    }
+
+    @GetMapping("/login")
+    public String loginPage(@ModelAttribute LoginForm loginForm) {
+        return "member/loginPage";
+    }
+
+    @PostMapping("/login")
+    public String loginMember(@Valid @ModelAttribute LoginForm loginForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "member/loginPage";
+        }
+
+        memberService.loginMember(loginForm);
+
+        return "redirect:/";
     }
 }
