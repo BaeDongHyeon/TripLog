@@ -31,7 +31,7 @@ public class LoginMemberDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return member.getEmail();
+        return member.getName();
     }
 
     // 계정이 만료 되었는지 (true: 만료x)
