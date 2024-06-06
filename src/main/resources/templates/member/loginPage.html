@@ -34,7 +34,7 @@
     <form th:action th:object="${loginForm}" method="post">
 
         <div class="form-floating">
-            <input type="text" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email">
+            <input type="email" id="email" th:field="*{email}" class="form-control" th:errorclass="field-error" placeholder="email">
             <label for="email">이메일</label>
             <div class="field-error" th:errors="*{email}"/>
         </div>

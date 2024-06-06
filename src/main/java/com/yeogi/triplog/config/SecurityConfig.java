@@ -14,9 +14,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/h2-console/**").permitAll()  // H2 콘솔 접근 허용
-                        .anyRequest().permitAll())
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/h2-console/**", "/signup", "/login", "/css/**").permitAll()
+                        .anyRequest().permitAll()
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")    // 로그인 페이지 설정
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("email")
+                        .defaultSuccessUrl("/") // 로그인 성공시 redirect URL
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")   // 로그아웃 URL
+                        .logoutSuccessUrl("/")  // 로그아웃 성공시 redirect URL
+                        .permitAll()
+                )
                 .csrf(csrf -> csrf.disable()) // csrf 보호 비활성화
                 .headers(headers -> headers
                         .frameOptions(frameOptionsConfig -> frameOptionsConfig.sameOrigin()));   // H2 콘솔 사용을 위한 설정
