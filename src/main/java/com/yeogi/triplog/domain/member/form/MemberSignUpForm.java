@@ -12,6 +12,9 @@ public class MemberSignUpForm {
     @NotEmpty(message = "이름을 입력해주세요.")
     private String name;
 
+    @NotEmpty(message = "닉네임을 입력해주세요.")
+    private String nickname;
+
     @NotEmpty(message = "전화번호를 입력해주세요.")
     private String phone;
 
@@ -24,6 +27,7 @@ public class MemberSignUpForm {
     public Member toEntity() {
         return Member.builder()
                 .name(name)
+                .nickname(nickname)
                 .phone(phone)
                 .email(email)
                 .password(password)

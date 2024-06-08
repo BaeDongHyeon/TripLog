@@ -46,6 +46,12 @@
         </div>
 
         <div class="form-floating">
+            <input type="text" id="nickname" th:field="*{nickname}" class="form-control" th:errorclass="field-error" placeholder="nickname">
+            <label for="name">닉네임</label>
+            <div class="field-error" th:errors="*{nickname}"/>
+        </div>
+
+        <div class="form-floating">
             <input type="text" id="phone" th:field="*{phone}" class="form-control" th:errorclass="field-error" placeholder="phoneNumber">
             <label for="phone">전화번호</label>
             <div class="field-error" th:errors="*{phone}"/>
