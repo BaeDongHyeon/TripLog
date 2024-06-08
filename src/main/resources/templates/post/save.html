@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <title>게시글 등록</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">게시글 등록</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form th:action method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">첨부파일</label>
+                    <input type="file" class="form-control-file" id="file" name="attachFile">
+                </div>
+                <div class="form-group">
+                    <label for="images">이미지 업로드</label>
+                    <input type="file" class="form-control-file" id="images" multiple name="imageFiles">
+                </div>
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="author">작성자</label>
+                    <input type="text" class="form-control" id="author" th:value="${member.nickname}" readonly
+                           name="author">
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" rows="4" placeholder="내용을 입력하세요"
+                              name="content"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" style="width: 100px;">작성</button>
+                    <a href="/" role="button" class="btn btn-secondary" style="width: 100px;">목록으로</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
