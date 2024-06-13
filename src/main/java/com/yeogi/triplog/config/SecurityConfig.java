@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @EnableWebSecurity
 @Configuration
@@ -21,7 +22,8 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")    // 로그인 페이지 설정
-                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl("/login/process")
+                        .failureHandler(failureHandler())
                         .usernameParameter("email")
                         .defaultSuccessUrl("/") // 로그인 성공시 redirect URL
                         .permitAll()
@@ -40,5 +42,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new CustomAuthFailureHandler();
     }
 }
