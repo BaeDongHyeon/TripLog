@@ -34,6 +34,10 @@ public class LoginMemberDetail implements UserDetails {
         return member.getName();
     }
 
+    public String getNickname() {
+        return member.getNickname();
+    }
+
     // 계정이 만료 되었는지 (true: 만료x)
     @Override
     public boolean isAccountNonExpired() {
