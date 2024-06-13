@@ -27,6 +27,7 @@ public class DataInitializer {
                 member.setEmail(email);
                 member.setPassword(encodedPassword);
                 member.setName("홍길동");
+                member.setNickname("나의닉네임");
                 member.setPhone("01012345678");
 
                 memberRepository.save(member);
