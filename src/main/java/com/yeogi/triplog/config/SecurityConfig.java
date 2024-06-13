@@ -1,5 +1,6 @@
 package com.yeogi.triplog.config;
 
+import com.yeogi.triplog.config.handler.CustomAuthFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

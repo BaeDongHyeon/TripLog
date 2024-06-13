@@ -1,4 +1,4 @@
-package com.yeogi.triplog.config;
+package com.yeogi.triplog.config.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
