@@ -29,6 +29,7 @@ public class DataInitializer {
                 member.setName("홍길동");
                 member.setNickname("나의닉네임");
                 member.setPhone("01012345678");
+                member.setRole("ROLE_ADMIN");
 
                 memberRepository.save(member);
             }
