@@ -21,7 +21,6 @@ public class SecurityConfig {
                         .requestMatchers("/h2-console/**", "/signup", "/login", "/css/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/guest/**").hasRole("GUEST")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

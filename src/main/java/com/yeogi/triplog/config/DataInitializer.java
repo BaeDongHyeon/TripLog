@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.yeogi.triplog.domain.member.MemberRole.*;
+
 @Configuration
 @RequiredArgsConstructor
 public class DataInitializer {
@@ -23,13 +25,15 @@ public class DataInitializer {
             String encodedPassword = passwordEncoder.encode(rawPassword);
 
             if (!memberRepository.findByEmail(email).isPresent()) {
-                Member member = new Member();
-                member.setEmail(email);
-                member.setPassword(encodedPassword);
-                member.setName("홍길동");
-                member.setNickname("나의닉네임");
-                member.setPhone("01012345678");
-                member.setRole("ROLE_ADMIN");
+                Member member = Member.builder()
+                        .email(email)
+                        .password(encodedPassword)
+                        .name("홍길동")
+                        .nickname("나의닉네임")
+                        .phone("01012345678")
+                        .build();
+
+                member.updateRole(ADMIN);
 
                 memberRepository.save(member);
             }

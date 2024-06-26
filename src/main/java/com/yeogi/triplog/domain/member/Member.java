@@ -1,9 +1,7 @@
 package com.yeogi.triplog.domain.member;
 
 import com.yeogi.triplog.domain.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +25,7 @@ public class Member extends BaseEntity {
 
     private String password;
 
-    private String role;
+    private MemberRole memberRole;
 
     @Builder
     public Member(String name, String nickname, String phone, String email, String password) {
@@ -36,5 +34,13 @@ public class Member extends BaseEntity {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public void updateRole(MemberRole memberRole) {
+        this.memberRole = memberRole;
+    }
+
+    public String getRole() {
+        return memberRole.getRole();
     }
 }
