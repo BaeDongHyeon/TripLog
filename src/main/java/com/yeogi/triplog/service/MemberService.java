@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.yeogi.triplog.domain.member.MemberRole.*;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,7 +26,10 @@ public class MemberService {
         String encodedPassword = passwordEncoder.encode(memberSignUpForm.getPassword());
         memberSignUpForm.setPassword(encodedPassword);
 
-        memberRepository.save(memberSignUpForm.toEntity());
+        Member member = memberSignUpForm.toEntity();
+        member.updateRole(USER);
+
+        memberRepository.save(member);
     }
 
     public boolean isExistsEmail(EmailCheckRequest emailCheckRequest) {
