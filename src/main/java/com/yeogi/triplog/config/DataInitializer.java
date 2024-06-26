@@ -22,15 +22,18 @@ public class DataInitializer {
         return args -> {
             String email = "abc@naver.com";
             String rawPassword = "1234";
+            String name = "홍길동";
+            String nickname = "관리자";
+            String phone = "01012345678";
             String encodedPassword = passwordEncoder.encode(rawPassword);
 
             if (!memberRepository.findByEmail(email).isPresent()) {
                 Member member = Member.builder()
                         .email(email)
                         .password(encodedPassword)
-                        .name("홍길동")
-                        .nickname("나의닉네임")
-                        .phone("01012345678")
+                        .name(name)
+                        .nickname(nickname)
+                        .phone(phone)
                         .build();
 
                 member.updateRole(ADMIN);
