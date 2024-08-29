@@ -3,6 +3,7 @@ package com.yeogi.triplog.service;
 import com.yeogi.triplog.domain.member.Member;
 import com.yeogi.triplog.domain.member.form.EmailCheckRequest;
 import com.yeogi.triplog.domain.member.form.MemberSignUpForm;
+import com.yeogi.triplog.domain.member.form.MyPageMemberForm;
 import com.yeogi.triplog.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,5 +41,34 @@ public class MemberService {
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
         return !findMember.isEmpty();
+    }
+
+    public MyPageMemberForm getMyInfo(String email) {
+        Optional<Member> findMember = memberRepository.findByEmail(email);
+
+        if (!findMember.isPresent()) {
+            throw new IllegalArgumentException("사용자를 찾을 수 없음");
+        }
+        Member member = findMember.get();
+
+        return MyPageMemberForm.builder()
+                .name(member.getName())
+                .nickname(member.getNickname())
+                .email(member.getEmail())
+                .phone(member.getPhone())
+                .build();
+    }
+
+    public void updateMyInfo(MyPageMemberForm myPageMemberForm) {
+        Optional<Member> findMember = memberRepository.findByEmail(myPageMemberForm.getEmail());
+
+        if (!findMember.isPresent()) {
+            throw new IllegalArgumentException("사용자를 찾을 수 없음");
+        }
+
+        Member member = findMember.get();
+        member.updateInfo(myPageMemberForm);
+
+        memberRepository.save(member);
     }
 }

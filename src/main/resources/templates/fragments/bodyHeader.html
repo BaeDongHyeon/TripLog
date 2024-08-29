@@ -12,6 +12,7 @@
             <div class="navbar-nav ms-auto">
                 <th:block sec:authorize="isAuthenticated()">
                     <span class="nav-link" th:text="${#authentication?.principal.nickname + '님'}"></span>
+                    <a th:href="@{/mypage/{email}(email=${#authentication?.principal.email})}" class="nav-link">마이페이지</a>
                     <a class="nav-link" href="/logout">로그아웃</a>
                 </th:block>
                 <th:block sec:authorize="!isAuthenticated()">

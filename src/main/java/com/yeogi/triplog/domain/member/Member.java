@@ -1,6 +1,7 @@
 package com.yeogi.triplog.domain.member;
 
 import com.yeogi.triplog.domain.BaseEntity;
+import com.yeogi.triplog.domain.member.form.MyPageMemberForm;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,5 +42,12 @@ public class Member extends BaseEntity {
 
     public String getRole() {
         return memberRole.getRole();
+    }
+
+    public void updateInfo(MyPageMemberForm myPageMemberForm) {
+        this.name = myPageMemberForm.getName();
+        this.nickname = myPageMemberForm.getNickname();
+        this.phone = myPageMemberForm.getPhone();
+        this.email = myPageMemberForm.getEmail();
     }
 }
