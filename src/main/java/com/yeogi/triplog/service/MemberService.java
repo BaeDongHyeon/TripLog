@@ -59,7 +59,7 @@ public class MemberService {
                 .build();
     }
 
-    public void updateMyInfo(MyPageMemberForm myPageMemberForm) {
+    public Member updateMyInfo(MyPageMemberForm myPageMemberForm) {
         Optional<Member> findMember = memberRepository.findByEmail(myPageMemberForm.getEmail());
 
         if (!findMember.isPresent()) {
@@ -70,5 +70,6 @@ public class MemberService {
         member.updateInfo(myPageMemberForm);
 
         memberRepository.save(member);
+        return member;
     }
 }

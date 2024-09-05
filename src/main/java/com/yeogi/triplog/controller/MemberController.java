@@ -1,10 +1,14 @@
 package com.yeogi.triplog.controller;
 
+import com.yeogi.triplog.domain.member.Member;
 import com.yeogi.triplog.domain.member.form.MyPageMemberForm;
 import com.yeogi.triplog.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +48,17 @@ public class MemberController {
 
         log.info("update success log");
 
-        memberService.updateMyInfo(myPageMemberForm);
+        Member updateMember = memberService.updateMyInfo(myPageMemberForm);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(
+                updateMember,
+                authentication.getCredentials(),
+                authentication.getAuthorities());
+
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
         return "redirect:/mypage/" + myPageMemberForm.getEmail();
     }
 }
